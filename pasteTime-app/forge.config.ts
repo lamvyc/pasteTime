@@ -7,9 +7,12 @@ import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-nati
 import { WebpackPlugin } from '@electron-forge/plugin-webpack';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import { platform } from 'os';
+import { BrowserWindow } from 'electron';
 
 import { mainConfig } from './webpack.main.config';
 import { rendererConfig } from './webpack.renderer.config';
+import clipboardEvent from 'clipboard-event';
 
 const config: ForgeConfig = {
   packagerConfig: {
@@ -25,8 +28,8 @@ const config: ForgeConfig = {
         config: rendererConfig,
         entryPoints: [
           {
-            html: './src/index.html',
-            js: './src/renderer.ts',
+            html: '../renderer/public/index.html',
+            js: '../renderer/src/index.tsx',
             name: 'main_window',
             preload: {
               js: './src/preload.ts',
@@ -50,3 +53,13 @@ const config: ForgeConfig = {
 };
 
 export default config;
+
+export function startClipboardWatcher(win: BrowserWindow) {
+  if (platform() === 'win32') {
+    clipboardEvent.on('change', () => {
+      // 读取剪贴板内容并发送到渲染进程
+    });
+  } else if (platform() === 'darwin') {
+    // 仍用轮询
+  }
+}

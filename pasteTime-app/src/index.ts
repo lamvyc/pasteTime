@@ -10,6 +10,8 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+import { startClipboardWatcher } from './main/clipboard';
+
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -25,6 +27,9 @@ const createWindow = (): void => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  // 启动剪贴板监听
+  startClipboardWatcher(mainWindow);
 };
 
 // This method will be called when Electron has finished
