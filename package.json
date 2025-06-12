@@ -16,12 +16,15 @@
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "electron": "^36.4.0",
+    "less": "^4.3.0",
+    "less-loader": "^12.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "wait-on": "^8.0.3"
   },
   "dependencies": {
     "antd": "^5.26.0",
+    "clipboard-event": "^1.6.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "sqlite3": "^5.1.7"
