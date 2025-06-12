@@ -1,4 +1,5 @@
 import type { Configuration } from 'webpack';
+import path from 'node:path';
 
 import { rules } from './webpack.rules';
 import { plugins } from './webpack.plugins';
@@ -23,6 +24,10 @@ export const rendererConfig: Configuration = {
   },
   plugins,
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.less'],
+    alias: {
+      react: path.resolve(__dirname, '../renderer/node_modules/react'),
+      'react-dom': path.resolve(__dirname, '../renderer/node_modules/react-dom'),
+    },
   },
 };

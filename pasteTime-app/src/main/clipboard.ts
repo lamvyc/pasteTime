@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, clipboard } from 'electron';
 import { platform } from 'os';
+import { addRecord } from './db';
 
 let lastText = '';
 let lastImage = '';
@@ -17,12 +18,14 @@ export function startClipboardWatcher(win: BrowserWindow) {
       if (text && text !== lastText) {
         lastText = text;
         sendClipboardToRenderer(win, 'text', text);
+        addRecord('text', text).catch(console.error);
       }
       if (!image.isEmpty()) {
         const imgData = image.toDataURL();
         if (imgData !== lastImage) {
           lastImage = imgData;
           sendClipboardToRenderer(win, 'image', imgData);
+          addRecord('image', imgData).catch(console.error);
         }
       }
     }, 800);
@@ -34,12 +37,14 @@ export function startClipboardWatcher(win: BrowserWindow) {
       if (text && text !== lastText) {
         lastText = text;
         sendClipboardToRenderer(win, 'text', text);
+        addRecord('text', text).catch(console.error);
       }
       if (!image.isEmpty()) {
         const imgData = image.toDataURL();
         if (imgData !== lastImage) {
           lastImage = imgData;
           sendClipboardToRenderer(win, 'image', imgData);
+          addRecord('image', imgData).catch(console.error);
         }
       }
     }, 800);
