@@ -6,7 +6,7 @@ let lastText = '';
 let lastImage = '';
 
 function sendClipboardToRenderer(win: BrowserWindow, type: 'text' | 'image', data: string) {
-  win.webContents.send('clipboard-changed', { type, data });
+  win.webContents.send('clipboard-changed', { type, data, timestamp: Date.now() });
 }
 
 export function startClipboardWatcher(win: BrowserWindow) {
